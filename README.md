@@ -1,2 +1,3 @@
 # k8s-test
-optimization, hpa
+- optimization
+- hpa
