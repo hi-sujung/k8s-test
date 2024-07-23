@@ -1,28 +1,36 @@
 # Hi-sujung k8s-hpa-scaler
-In order to schedule Pods in K8s, the Microservice within the Pod must have sufficient resources. From the Kubernetes perspective, you can know the amount of resources needed in advance and deploy Pods on nodes as many resources as are available. `Hisujung` service set the CPU availability range by considering the number of nodes and target CPU usage rate, and proceeded with the process of optimizing it through testing.
+In order to schedule Pods in K8s, the Microservice within the Pod must have sufficient resources. From the Kubernetes perspective, you can know the amount of resources needed in advance and deploy Pods on nodes as many resources as are available. `Hi-sujung` service set the CPU availability range by considering the number of nodes and target CPU usage rate, and proceeded with the process of optimizing it through testing.
 
-## `Hisujung` Service Resource Settings
+<br/>
+Before you begin you need to clone the hisujung-msa-k8s/load-test:
+
+```bash
+git clone https://github.com/hi-sujung/hisujung-msa-k8s.git
+cd hisujung-msa-k8s/load-test/
+```
+
+## `Hi-sujung` Service Resource Settings
 - Target CPU Utilization: 50%
-- Container CPU Request: 100m (recommended to be below 100m for typical scenarios)
+- Container CPU Request: 100m 
 
 ### Microservice CPU Utilization
 CPU Utilization for Main Microservice: 500m <br/>
 <br/>
 CPU Utilization Calculation:
-```
+```bash
 CPU Utilization = (500m / 100m) * 100 = 500%
 ```
 Required Number of Pods:
-```
+```bash
 Required Pods = 500% / 50% = 10
 ```
 ### Required Number of Nodes
 Total CPU Request per Pod:
-```
+```bash
 Total CPU Request per Pod = 100m * 3 = 300m
 ```
 Total CPU Request for All Pods:
-```
+```bash
 Total CPU Request = 300m * (10 * 3) = 9000m
 ```
 ## Implementation
@@ -36,11 +44,11 @@ Our Kubernetes cluster is configured with the following specifications:
 
 ### Setting up the Metrics Server
 The Kubernetes Metrics Server is an aggregator of resource usage data in the cluster.
-```
+```bash
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 Verify that the Metrics Server is working:
-```
+```bash
 kubectl get apiservices v1beta1.metrics.k8s.io
 ```
 ### Auto Scaling based on CPU and memory usage
@@ -68,3 +76,24 @@ spec:
         averageUtilization: 50
 ```
 
+
+
+
+
+
+
+
+
+
+
+```bash
+kubectl apply -f hisujung-configmap.yaml && \
+kubectl apply -f hisujung-secret.yaml && \
+kubectl apply -f hisujung-ingress.yaml && \
+kubectl apply -f hisujung-test.yaml && \
+kubectl apply -f hisujung-hpa.yaml
+```
+Verify HPA is working:
+```bash
+kubectl get hpa
+```
