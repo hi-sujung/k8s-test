@@ -111,7 +111,7 @@ Once the pods are stable, proceed with load testing using `wrk`. By default, `wr
 ```bash
 kubectl get svc
 ```
-2. Run Wrk Load Tests:
+2. Run `wrk` Load Tests:
 ```bash
 wrk -t 10 -c 100 -d 30s http://<member-IP> & \
 wrk -t 10 -c 100 -d 30s http://<notice-IP> & \
