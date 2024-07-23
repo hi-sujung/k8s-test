@@ -105,7 +105,7 @@ kubectl get all
 #Monitor the HPA
 kubectl get hpa
 ```
-### Load Testing
+## Load Testing
 Once the pods are stable, proceed with load testing using `wrk`. By default, `wrk` performs load testing on a single URL. To perform load testing on multiple IPs simultaneously, a parallel script was executed. The `wait` command ensures that all background processes complete before proceeding.
 1. Get the External IPs for `member-service`, `notice-service`, and `portfolio-service`:
 ```bash
