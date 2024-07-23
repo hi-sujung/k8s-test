@@ -44,7 +44,8 @@ Our Kubernetes cluster is configured with the following specifications:
 - Boot Disk per Node: 30 GB
 
 ### Setting up the Metrics Server
-The Kubernetes Metrics Server is an aggregator of resource usage data in the cluster.
+The Kubernetes Metrics Server is an aggregator of resource usage data in the cluster.<br/> 
+<br/>To install the Metrics Server, use the following command:
 ```bash
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
