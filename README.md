@@ -76,8 +76,8 @@ spec:
         type: Utilization
         averageUtilization: 50
 ```
-### Installing Wrk for Load Testing
-#### Benchmarking Tool Selection (wrk)
+### Installing `wrk` for Load Testing
+#### Benchmarking Tool Selection (`wrk`)
 The benchmarking tool was selected based on the criteria of being quick and simple to use. Rather than opting for overly complex tools, `wrk` was chosen for its ease of execution from the command line and effectiveness in server load testing.
 
 <br/>
@@ -96,7 +96,7 @@ kubectl apply -f hisujung-ingress.yaml && \
 kubectl apply -f hisujung-test.yaml && \
 kubectl apply -f hisujung-hpa.yaml
 ```
-Verify HPA is working (Ensure the pods stabilize (CPU usage below 5% and replicas count at 1).):
+Verify HPA is working (Ensure the pods stabilize (CPU usage below 5% and replicas count at 1)):
 ```bash
 #Check that all resources are created successfully
 kubectl get all
